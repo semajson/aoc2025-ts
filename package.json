@@ -1,0 +1,30 @@
+{
+  "name": "aoc2025-ts",
+  "version": "1.0.0",
+  "description": "Advent of Code 2025 - TypeScript Solutions",
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "day": "tsx src/index.ts",
+    "new": "tsx scripts/new-day.ts",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "format": "prettier --write \"src/**/*.ts\""
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "@typescript-eslint/eslint-plugin": "^8.17.0",
+    "@typescript-eslint/parser": "^8.17.0",
+    "eslint": "^9.16.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.4.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
