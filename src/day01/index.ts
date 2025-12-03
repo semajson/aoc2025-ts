@@ -40,10 +40,12 @@ export function part2(lines: string[]): number {
     let old_current = current;
 
     let rotation_amount = rotation.amount;
+
+    // If loop all way around, add ticks + simplify
     if (rotation_amount >= 100) {
       zero_count += Math.floor(rotation.amount / 100);
+      rotation_amount = rotation_amount % 100;
     }
-    rotation_amount = rotation_amount % 100;
 
     current += rotation_amount * rotation.direction_sign;
 
@@ -52,6 +54,8 @@ export function part2(lines: string[]): number {
     } else if (current >= 100) {
       zero_count += 1;
     } else if (current <= 0 && old_current != 0) {
+      // old_current check needed as if we started at 0 and then go left,
+      // there is no tick
       zero_count += 1;
     }
 
