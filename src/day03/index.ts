@@ -8,11 +8,9 @@
  * Part 1:
  */
 export function part1(lines: string[]): number {
-  // Parse input
-
   let sum = 0;
   for (const bank of lines) {
-    sum += largest_joltage(bank, 2);
+    sum += maxJoltage(bank, 2);
   }
   return sum;
 }
@@ -21,28 +19,27 @@ export function part1(lines: string[]): number {
  * Part 2:
  */
 export function part2(lines: string[]): number {
-  // Parse input
   let sum = 0;
   for (const bank of lines) {
-    sum += largest_joltage(bank, 12);
+    sum += maxJoltage(bank, 12);
   }
   return sum;
 }
 
-function largest_joltage(bank: string, flip: number): number {
-  let largest = bank.slice(0, flip);
+function maxJoltage(bank: string, numBatteries: number): number {
+  let maxJoltage = bank.slice(0, numBatteries);
 
-  for (let i = flip; i < bank.length; i += 1) {
-    let new_largest = largest;
+  for (let i = numBatteries; i < bank.length; i++) {
+    let newMaxJoltage = maxJoltage;
 
-    for (let j = 0; j < flip; j += 1) {
-      let consider = largest.slice(0, j) + largest.slice(j + 1) + bank[i];
+    for (let j = 0; j < numBatteries; j++) {
+      let consider = maxJoltage.slice(0, j) + maxJoltage.slice(j + 1) + bank[i];
 
-      if (Number(consider) > Number(new_largest)) {
-        new_largest = consider;
+      if (Number(consider) > Number(newMaxJoltage)) {
+        newMaxJoltage = consider;
       }
     }
-    largest = new_largest;
+    maxJoltage = newMaxJoltage;
   }
-  return Number(largest);
+  return Number(maxJoltage);
 }
