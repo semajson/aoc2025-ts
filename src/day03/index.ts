@@ -12,7 +12,7 @@ export function part1(lines: string[]): number {
 
   let sum = 0;
   for (const bank of lines) {
-    sum += largest_joltage_2(bank);
+    sum += largest_joltage(bank, 2);
   }
   return sum;
 }
@@ -24,38 +24,25 @@ export function part2(lines: string[]): number {
   // Parse input
   let sum = 0;
   for (const bank of lines) {
-    sum += largest_joltage_12(bank);
+    sum += largest_joltage(bank, 12);
   }
   return sum;
 }
 
-function largest_joltage_2(bank: string): number {
-  let largest_tot = 0;
-  let largest_first_num = Number(bank[0]);
-  for (let i = 1; i < bank.length; i += 1) {
-    let second_num = Number(bank[i]);
-    let tot = largest_first_num * 10 + second_num;
+function largest_joltage(bank: string, flip: number): number {
+  let largest = bank.slice(0, flip);
 
-    largest_tot = Math.max(largest_tot, tot);
-    largest_first_num = Math.max(largest_first_num, second_num);
-  }
-  return largest_tot;
-}
+  for (let i = flip; i < bank.length; i += 1) {
+    let new_largest = largest;
 
-function largest_joltage_12(bank: string): number {
-  let largest_12 = bank.slice(0, 12);
+    for (let j = 0; j < flip; j += 1) {
+      let consider = largest.slice(0, j) + largest.slice(j + 1) + bank[i];
 
-  for (let i = 12; i < bank.length; i += 1) {
-    let new_largest_12 = largest_12;
-
-    for (let j = 0; j < 12; j += 1) {
-      let consider = largest_12.slice(0, j) + largest_12.slice(j + 1) + bank[i];
-
-      if (Number(consider) > Number(new_largest_12)) {
-        new_largest_12 = consider;
+      if (Number(consider) > Number(new_largest)) {
+        new_largest = consider;
       }
     }
-    largest_12 = new_largest_12;
+    largest = new_largest;
   }
-  return Number(largest_12);
+  return Number(largest);
 }
